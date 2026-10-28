@@ -1,91 +1,312 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>PhishGuard — Pattern Detective</title>
-  <link rel="stylesheet" href="/static/style.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
   <div class="shell">
+
     <header class="topbar">
-      <a class="brand" href="#"><span class="brand-mark">✿</span><span>phishguard<span class="dot">.</span></span></a>
-      <div class="top-note"><span class="pulse"></span> REGEX + AUTOMATA LAB</div>
+      <a class="brand" href="#">
+        <span class="brand-mark">✿</span>
+        <span>phishguard<span class="dot">.</span></span>
+      </a>
+
+      <div class="top-note">
+        <span class="pulse"></span>
+        REGEX + AUTOMATA LAB
+      </div>
     </header>
 
     <main>
+
+      <!-- Hero section -->
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">A LITTLE CYBER SAFETY, A LOT OF LOGIC</p>
-          <h1>Spot the <span class="highlight">pattern.</span><br>Pause before you click.</h1>
-          <p class="subhead">Inspect email addresses, URLs and message text with transparent regex rules and a tiny finite automaton.</p>
-          <div class="hero-pills"><span>⌁ Regex rules</span><span>◎ DFA trace</span><span>♡ Human-readable results</span></div>
+
+          <h1>
+            Spot the <span class="highlight">pattern.</span><br>
+            Pause before you click.
+          </h1>
+
+          <p class="subhead">
+            Inspect email addresses, URLs and message text with transparent
+            regex rules and a tiny finite automaton.
+          </p>
+
+          <div class="hero-pills">
+            <span>⌁ Regex rules</span>
+            <span>◎ DFA trace</span>
+            <span>♡ Human-readable results</span>
+          </div>
         </div>
+
         <div class="hero-art" aria-hidden="true">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="shield"><span>✓</span></div><div class="spark spark-a">✦</div><div class="spark spark-b">✳</div>
-          <div class="mini-card card-pink">pattern found <b>!</b></div>
-          <div class="mini-card card-yellow">think first <b>♡</b></div>
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+
+          <div class="shield"><span>✓</span></div>
+
+          <div class="spark spark-a">✦</div>
+          <div class="spark spark-b">✳</div>
+
+          <div class="mini-card card-pink">
+            pattern found <b>!</b>
+          </div>
+
+          <div class="mini-card card-yellow">
+            think first <b>♡</b>
+          </div>
         </div>
       </section>
 
+      <!-- Input and results -->
       <section class="work-grid">
+
         <article class="panel input-panel">
-          <div class="panel-heading"><div><p class="eyebrow">01 / INPUT</p><h2>What should we inspect?</h2></div><span class="step-badge">✎</span></div>
-          <div class="mode-tabs" role="tablist">
-            <button class="mode active" data-mode="message">Message</button>
-            <button class="mode" data-mode="url">URL</button>
-            <button class="mode" data-mode="email">Email address</button>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">01 / INPUT</p>
+              <h2>What should we inspect?</h2>
+            </div>
+            <span class="step-badge">✎</span>
           </div>
-          <label for="inputText" id="inputLabel">Paste an email or message</label>
-          <textarea id="inputText" maxlength="10000" placeholder="Example: URGENT! Verify your account now and enter your password…"></textarea>
-          <div class="input-foot"><span id="charCount">0 / 10000</span><span>Keep real private information out of demos.</span></div>
-          <div class="button-row"><button class="primary-btn" id="analyzeBtn">Analyze patterns <span>↗</span></button><button class="ghost-btn" id="sampleBtn">Try a sample</button></div>
+
+          <div class="mode-tabs" role="tablist">
+            <button class="mode active" data-mode="message" type="button">
+              Message
+            </button>
+            <button class="mode" data-mode="url" type="button">
+              URL
+            </button>
+            <button class="mode" data-mode="email" type="button">
+              Email address
+            </button>
+          </div>
+
+          <label for="inputText" id="inputLabel">
+            Paste an email or message
+          </label>
+
+          <textarea
+            id="inputText"
+            maxlength="10000"
+            placeholder="Example: URGENT! Verify your account now and enter your password…"
+          ></textarea>
+
+          <div class="input-foot">
+            <span id="charCount">0 / 10000</span>
+            <span>Keep real private information out of demos.</span>
+          </div>
+
+          <div class="button-row">
+            <button class="primary-btn" id="analyzeBtn" type="button">
+              Analyze patterns <span>↗</span>
+            </button>
+
+            <button class="ghost-btn" id="sampleBtn" type="button">
+              Try a sample
+            </button>
+          </div>
+
           <p class="error" id="errorMsg" role="alert"></p>
         </article>
 
         <article class="panel result-panel">
-          <div class="panel-heading"><div><p class="eyebrow">02 / FINDINGS</p><h2>Pattern report</h2></div><span class="step-badge green">✦</span></div>
-          <div id="emptyState" class="empty-state"><div class="empty-icon">⌕</div><h3>Your report will appear here</h3><p>Run an analysis to see matched rules, explanations and a caution score.</p></div>
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">02 / FINDINGS</p>
+              <h2>Pattern report</h2>
+            </div>
+            <span class="step-badge green">✦</span>
+          </div>
+
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon">⌕</div>
+            <h3>Your report will appear here</h3>
+            <p>
+              Run an analysis to see matched rules, explanations and a
+              caution score.
+            </p>
+          </div>
+
           <div id="results" hidden>
-            <div class="score-row"><div><span class="muted-label">RULE-BASED SCORE</span><div class="score"><span id="score">0</span><small>/100</small></div></div><div class="risk-chip" id="riskLevel">Low concern</div></div>
-            <div class="meter"><div id="meterFill"></div></div>
+            <div class="score-row">
+              <div>
+                <span class="muted-label">RULE-BASED SCORE</span>
+
+                <div class="score">
+                  <span id="score">0</span>
+                  <small>/100</small>
+                </div>
+              </div>
+
+              <div class="risk-chip" id="riskLevel">Low concern</div>
+            </div>
+
+            <div class="meter">
+              <div id="meterFill"></div>
+            </div>
+
             <div id="emailStatus" class="email-status" hidden></div>
+
             <h3 class="finding-title">What we noticed</h3>
+
             <div id="findings" class="findings"></div>
+
             <p id="disclaimer" class="disclaimer"></p>
           </div>
         </article>
+
       </section>
 
+      <!-- Automata theory -->
       <section class="panel automata-panel">
-        <div class="panel-heading"><div><p class="eyebrow">03 / AUTOMATA THEORY</p><h2>Watch a DFA think</h2><p class="panel-desc">This teaching automaton accepts an input if it contains at least one digit.</p></div><span class="step-badge yellow">↝</span></div>
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">03 / AUTOMATA THEORY</p>
+            <h2>Watch a DFA think</h2>
+
+            <p class="panel-desc">
+              This teaching automaton accepts an input if it contains at
+              least one digit.
+            </p>
+          </div>
+
+          <span class="step-badge yellow">↝</span>
+        </div>
+
         <div class="automata-content">
+
           <div class="dfa-diagram">
             <div class="start-arrow">start</div>
-            <div class="state state-q0" id="stateQ0"><span>q₀</span><small>no digit yet</small></div>
-            <div class="transition-loop">a, b, other non-digits ↻</div>
-            <div class="edge-label">0 or 1</div><div class="edge-line">→</div>
-            <div class="state accepting" id="stateQ1"><span>q₁</span><small>digit found</small></div>
+
+            <div class="state state-q0" id="stateQ0">
+              <span>q₀</span>
+              <small>no digit yet</small>
+            </div>
+
+            <div class="transition-loop">
+              a, b, other non-digits ↻
+            </div>
+
+            <div class="edge-label">0 or 1</div>
+            <div class="edge-line">→</div>
+
+            <div class="state accepting" id="stateQ1">
+              <span>q₁</span>
+              <small>digit found</small>
+            </div>
+
             <div class="accept-loop">any character ↻</div>
           </div>
+
           <div class="trace-box">
-            <div class="trace-header"><b>Input trace</b><span id="traceStatus">Waiting for input</span></div>
-            <div class="trace-input"><label for="traceInput">Test string</label><input id="traceInput" value="hello2" maxlength="100"><button id="traceBtn" class="small-btn">Run DFA</button></div>
-            <div id="traceSteps" class="trace-steps"><span class="trace-placeholder">Run the DFA to see each state transition.</span></div>
-            <p class="tiny-note">Regex equivalent: <code>[0-9]</code> · DFA model file included for JFLAP.</p>
+            <div class="trace-header">
+              <b>Input trace</b>
+              <span id="traceStatus">Waiting for input</span>
+            </div>
+
+            <div class="trace-input">
+              <label for="traceInput">Test string</label>
+
+              <input
+                id="traceInput"
+                type="text"
+                value="hello2"
+                maxlength="100"
+              >
+
+              <button id="traceBtn" class="small-btn" type="button">
+                Run DFA
+              </button>
+            </div>
+
+            <div id="traceSteps" class="trace-steps">
+              <span class="trace-placeholder">
+                Run the DFA to see each state transition.
+              </span>
+            </div>
+
+            <p class="tiny-note">
+              Regex equivalent: <code>[0-9]</code> · DFA model file included
+              for JFLAP.
+            </p>
           </div>
+
         </div>
       </section>
 
+      <!-- Information cards -->
       <section class="bottom-grid">
-        <article class="info-card pink-card"><div class="info-icon">⌘</div><h3>Regex laboratory</h3><p>Rules match common patterns such as urgency phrases, credential requests, and shortened links.</p><code>urgent|verify now|password</code></article>
-        <article class="info-card green-card"><div class="info-icon">↗</div><h3>Open Regex101</h3><p>Test a sample pattern in Regex101. The website itself runs its checks locally through the Python backend.</p><a id="regex101Link" href="https://regex101.com/" target="_blank" rel="noopener">Open Regex101 ↗</a></article>
-        <article class="info-card yellow-card"><div class="info-icon">♡</div><h3>Stay curious, stay cautious</h3><p>Patterns are clues, not proof. Verify the sender through a trusted channel and avoid opening unexpected links.</p></article>
+
+        <article class="info-card pink-card">
+          <div class="info-icon">⌘</div>
+
+          <h3>Regex laboratory</h3>
+
+          <p>
+            Rules match common patterns such as urgency phrases,
+            credential requests, and shortened links.
+          </p>
+
+          <code>urgent|verify now|password</code>
+        </article>
+
+        <article class="info-card green-card">
+          <div class="info-icon">↗</div>
+
+          <h3>Open Regex101</h3>
+
+          <p>
+            Test a sample pattern in Regex101. The website itself runs
+            its checks locally through the Python backend.
+          </p>
+
+          <a
+            id="regex101Link"
+            href="https://regex101.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Regex101 ↗
+          </a>
+        </article>
+
+        <article class="info-card yellow-card">
+          <div class="info-icon">♡</div>
+
+          <h3>Stay curious, stay cautious</h3>
+
+          <p>
+            Patterns are clues, not proof. Verify the sender through a
+            trusted channel and avoid opening unexpected links.
+          </p>
+        </article>
+
       </section>
+
     </main>
-    <footer><span>✿ PhishGuard</span><span>Made for learning • Regex + DFA</span><span>Not a security guarantee</span></footer>
+
+    <footer>
+      <span>✿ PhishGuard</span>
+      <span>Made for learning • Regex + DFA</span>
+      <span>Not a security guarantee</span>
+    </footer>
+
   </div>
-  <script src="/static/script.js"></script>
+
+  <!-- JavaScript -->
+  <script src="./script.js"></script>
 </body>
 </html>
+```
